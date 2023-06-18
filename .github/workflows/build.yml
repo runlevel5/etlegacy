@@ -210,17 +210,11 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Downloading NDK
-        uses: actions/checkout@v3
-        with:
-          repository: rafal1137/NDK_ETL
-          path: NDK_ETL
-
       - name: Build
         run: |
-          chmod -R 775 $GITHUB_WORKSPACE/NDK_ETL/ndk-bundle
+          chmod -R 775 $GITHUB_WORKSPACE/ndk/ndk-bundle
           echo "cmake.dir=/opt/cmake/" | tee -a local.properties
-          echo "ndk.dir=$GITHUB_WORKSPACE/NDK_ETL/ndk-bundle" | tee -a local.properties
+          echo "ndk.dir=$GITHUB_WORKSPACE/ndk/ndk-bundle" | tee -a local.properties
           git config --global --add safe.directory $GITHUB_WORKSPACE
           git fetch --tags --force
           ./gradlew clean build
@@ -579,12 +573,6 @@ jobs:
           submodules: true
           fetch-depth: 0
 
-      - name: Downloading NDK
-        uses: actions/checkout@v3
-        with:
-          repository: rafal1137/NDK_ETL
-          path: NDK_ETL
-
       - uses: actions/download-artifact@v3.0.1
         with:
           name: All-mods
@@ -596,9 +584,9 @@ jobs:
 
       - name: Build and Generate Package
         run: |
-          chmod -R 775 $GITHUB_WORKSPACE/NDK_ETL/ndk-bundle
+          chmod -R 775 $GITHUB_WORKSPACE/ndk/ndk-bundle
           echo "cmake.dir=/opt/cmake/" | tee -a local.properties
-          echo "ndk.dir=$GITHUB_WORKSPACE/NDK_ETL/ndk-bundle" | tee -a local.properties
+          echo "ndk.dir=$GITHUB_WORKSPACE/ndk/ndk-bundle" | tee -a local.properties
           git config --global --add safe.directory $GITHUB_WORKSPACE
           git fetch --tags --force
           ./gradlew clean assembleRelease
