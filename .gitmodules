@@ -4,3 +4,6 @@
 	branch = master
 	ignore = dirty
 	shallow = true
+[submodule "ndk"]
+	path = ndk
+	url = https://github.com/rafal1137/NDK_ETL
